@@ -651,7 +651,7 @@ class DeserializerBitcoinDiamond(Deserializer):
         else:
             return TxBitcoinDiamond(
                 self._read_le_int32(),  # version
-                hash_to_str(self._read_nbytes(32)),  # blockhash
+                hash_to_hex_str(self._read_nbytes(32)),  # blockhash
                 self._read_inputs(),  # inputs
                 self._read_outputs(),  # outputs
                 self._read_le_uint32()  # locktime
@@ -693,7 +693,7 @@ class DeserializerBitcoinDiamondSegWit(DeserializerBitcoinDiamond,
         start = self.cursor
         version = self._read_le_int32()
         if version == self.bitcoin_diamond_tx_version:
-            present_block_hash = hash_to_str(self._read_nbytes(32))
+            present_block_hash = hash_to_hex_str(self._read_nbytes(32))
         else:
             present_block_hash = None
         orig_ser = self.binary[start:self.cursor]
@@ -737,7 +737,7 @@ class DeserializerBitcoinDiamondSegWit(DeserializerBitcoinDiamond,
         # Ugh, this is nasty.
         version = self._read_le_int32()
         if version == self.bitcoin_diamond_tx_version:
-            present_block_hash = hash_to_str(self._read_nbytes(32))
+            present_block_hash = hash_to_hex_str(self._read_nbytes(32))
         else:
             present_block_hash = None
         orig_ser = self.binary[start:self.cursor]
