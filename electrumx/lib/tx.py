@@ -658,7 +658,7 @@ class DeserializerBitcoinDiamond(Deserializer):
             )
 
     def _get_version(self):
-        result, = unpack_int32_from(self.binary, self.cursor)
+        result, = unpack_le_int32_from(self.binary, self.cursor)
         return result
 
 
